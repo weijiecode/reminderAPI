@@ -39,7 +39,7 @@ class Backlog {
     }
     // 查询待办事项
     async selectbacklog(request, resposne, next){
-        let selectSql = 'select * from backlog where username=? and done=?'
+        let selectSql = 'select * from backlog where username=? and done=? order by datetime asc'
         let params = [
             request.username,
             request.body.done
