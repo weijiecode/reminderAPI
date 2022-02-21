@@ -10,7 +10,7 @@ module.exports = async (request, resposne, next) => {
             const tokenData = jwt.verify(token, require('../config/index').tokenKey)
             if (tokenData) {
                 //在controller/test.js里面的reuqest请求里面有一个name值
-                console.log(tokenData)
+                // console.log(tokenData)
                 request.username = tokenData.name
                 next()
             }

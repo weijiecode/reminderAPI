@@ -12,6 +12,7 @@ server.use(express.json())
 server.use('/account',require('./routers/account'))
 server.use('/test',require('./routers/test'))
 server.use('/backlog',require('./routers/backlog'))
+server.use('/mycenter',require('./routers/mycenter'))
 
 
 server.listen(5001,()=>{

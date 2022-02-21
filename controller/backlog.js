@@ -14,8 +14,8 @@ class Backlog {
             request.body.colorbg,
             moment().format('YYYY-MM-DD HH:mm:ss')
         ]
-        console.log(params)
-        console.log(insertSql)
+        // console.log(params)
+        // console.log(insertSql)
         try{
             let result = await db.exec(insertSql,params)
             if(result && result.affectedRows >= 1){
