@@ -11,13 +11,13 @@ class Account {
         let insertSql = 'insert into users(`username`,`password`,`createtime`)values(?,?,?)'
         let params = [
             request.body.reg_username,
-            md5(request.body.reg_password+require('../config/index').key),
+            md5(request.body.reg_password + require('../config/index').key),
             moment().format('YYYY-MM-DD HH:mm:ss')
         ]
         // console.log(params)
-        try{
-            let result = await db.exec(insertSql,params)
-            if(result && result.affectedRows >= 1) {
+        try {
+            let result = await db.exec(insertSql, params)
+            if (result && result.affectedRows >= 1) {
                 resposne.json({
                     code: 200,
                     msg: '注册成功',
@@ -28,7 +28,7 @@ class Account {
                     msg: '注册失败'
                 })
             }
-        } catch (error){
+        } catch (error) {
             resposne.json({
                 code: -201,
                 msg: '服务器异常',
@@ -37,35 +37,35 @@ class Account {
         }
     }
     // 登录
-    async login(request, resposne, next){
+    async login(request, resposne, next) {
         let loginSql = 'select * from users where username=? and password=? and status=1'
         let params = [
             request.body.username,
-            md5(request.body.password+require('../config').key)
+            md5(request.body.password + require('../config').key)
         ]
         // console.log(params)
         // token加密
-        let token = jwt.sign({name:request.body.username,id:request.body.id}, require('../config/index').tokenKey, {
-            expiresIn : 60*60// 授权时效1小时
+        let token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
+            expiresIn: 60 * 60// 授权时效1小时
         })
-        try{
-            let result = await db.exec(loginSql,params)
+        try {
+            let result = await db.exec(loginSql, params)
             // console.log(result[0])
 
-            if(result && result.length >= 1){
+            if (result && result.length >= 1) {
                 resposne.json({
                     code: 200,
                     msg: '登录成功',
                     data: result[0],
                     token: token
                 })
-            } else{
+            } else {
                 resposne.json({
                     code: 201,
                     msg: '账号或密码错误'
                 })
             }
-        } catch(error){
+        } catch (error) {
             resposne.json({
                 code: -201,
                 msg: '服务器异常',
@@ -79,24 +79,56 @@ class Account {
         //         info: data
         //     },require('../config/index').tokenKey)
         // }
-        
+
     }
     // 查询用户数据
-    async selectuserdata(request, resposne, next){
+    async selectuserdata(request, resposne, next) {
         let userSql = 'select * from users where username=?'
         let parmas = request.body.username
-        try{
-            let result = await db.exec(userSql,parmas)
-            if(result && result.length >= 1){
+        try {
+            let result = await db.exec(userSql, parmas)
+            if (result && result.length >= 1) {
                 resposne.json({
                     code: 200,
                     msg: '获取用户数据成功',
                     data: result
                 })
-            }else{
+            } else {
                 resposne.json({
                     code: 201,
                     msg: '获取用户数据失败，请重试'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
+    // 修改用户信息
+    async updatemycenter(request, resposne, next){
+        let updateSql = 'update users set nickname=?,introduction=?,sex=?,phone=?,email=? where username=?'
+        let params = [
+            request.body.nickname,
+            request.body.introduction,
+            request.body.sex,
+            request.body.phone,
+            request.body.email,
+            request.body.username
+        ]
+        try{
+            let result = await db.exec(updateSql,params)
+            if(result && result.affectedRows >= 1){
+                resposne.json({
+                    code: 200,
+                    msg: '修改用户数据成功'
+                })
+            }else{
+                resposne.json({
+                    code: 201,
+                    msg: '修改用户数据失败，请重试'
                 })
             }
         }catch(error){
@@ -106,6 +138,14 @@ class Account {
                 error
             })
         }
+    }
+    // 修改用户头像
+    async updatephoto(request, resposne, next) {
+        const file = request.file
+        resposne.json({
+            code: 200,
+            data: file
+        })
     }
 }
 
