@@ -142,6 +142,7 @@ class Account {
     // 修改用户头像
     async updatephoto(request, resposne, next) {
         const file = request.file
+        file.url = `http://localhost:5001/public/upload/${file.filename}`
         resposne.json({
             code: 200,
             data: file
