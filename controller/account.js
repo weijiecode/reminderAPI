@@ -139,14 +139,42 @@ class Account {
             })
         }
     }
-    // 修改用户头像
-    async updatephoto(request, resposne, next) {
+    // 发送用户头像url
+    photouploadurl(request, resposne, next){
         const file = request.file
         file.url = `http://localhost:5001/public/upload/${file.filename}`
         resposne.json({
-            code: 200,
+            code: 202,
             data: file
         })
+    }
+    // 修改用户头像
+    async updatephoto(request, resposne, next) {
+        let updateSql = 'update users set photo=? where username=?'
+        let params = [
+            request.body.photo,
+            request.body.username
+        ]
+        try{
+            let result = await db.exec(updateSql,params)
+            if(result && result.affectedRows >= 1){
+                resposne.json({
+                    code: 200,
+                    msg: '修改用户头像成功'
+                })
+            }else{
+                resposne.json({
+                    code: 201,
+                    msg: '修改用户失败，请重试'
+                })
+            }
+        }catch(error){
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
     }
 }
 
