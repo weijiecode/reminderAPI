@@ -4,6 +4,8 @@ const moment = require('moment')
 const md5 = require('md5')
 //token
 const jwt = require('jsonwebtoken')
+let fs = require('fs');
+let path = require('path');
 
 class Account {
     // 注册
@@ -14,11 +16,10 @@ class Account {
             md5(request.body.reg_password + require('../config/index').key),
             moment().format('YYYY-MM-DD HH:mm:ss')
         ]
-        // console.log(params)
         try {
             let result = await db.exec(insertSql, params)
             if (result && result.affectedRows >= 1) {
-                resposne.json({
+                resposne.json({ 
                     code: 200,
                     msg: '注册成功',
                 })
@@ -51,7 +52,6 @@ class Account {
         try {
             let result = await db.exec(loginSql, params)
             // console.log(result[0])
-
             if (result && result.length >= 1) {
                 resposne.json({
                     code: 200,
@@ -162,6 +162,9 @@ class Account {
                     code: 200,
                     msg: '修改用户头像成功'
                 })
+                let delphoto = path.resolve(__dirname, '../public/upload/')+'/'+request.body.oldphoto.split('/').pop()
+                //console.log(delphoto)
+                try{fs.unlinkSync(delphoto);}catch(error){}
             }else{
                 resposne.json({
                     code: 201,
@@ -173,6 +176,34 @@ class Account {
                 code: -201,
                 msg: '服务器异常',
                 error
+            })
+        }
+    }
+    // 修改密码
+    async updatepassword(request, resposne, next) {
+        let updateSql = 'update users set password=? where username=? and password=?'
+        let params = [
+            md5(request.body.newpassword + require('../config/index').key),
+            request.body.username,
+            md5(request.body.oldpassword + require('../config/index').key)
+        ]
+        try{
+            let result = await db.exec(updateSql,params)
+            if(result && result.affectedRows >= 1){
+                resposne.json({
+                    code: 200,
+                    msg: '修改密码成功'
+                })
+            }else {
+                resposne.json({
+                    code: 201,
+                    msg: '修改密码失败，请重试'
+                })
+            }
+        }catch(error){
+            resposne.json({
+                code: -201,
+                msg: '服务器异常'
             })
         }
     }

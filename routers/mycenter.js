@@ -9,9 +9,11 @@ const upload = multer({dest:"./public/upload"})
 router.post('/userdata',tokenK,require('../controller/account').selectuserdata)
 // 修改用户数据
 router.post('/updateuserdata',tokenK,require('../controller/account').updatemycenter)
-//发送用户头像url
-router.post('/photouploadurl',upload.single('file'),require('../controller/account').photouploadurl)
-//修改用户头像
+// 发送用户头像url
+router.post('/photouploadurl',upload.single('file'),tokenK,require('../controller/account').photouploadurl)
+// 修改用户头像
 router.post('/updatephoto',tokenK,require('../controller/account').updatephoto)
+// 修改密码
+router.post('/updatepassword',tokenK,require('../controller/account').updatepassword)
 
 module.exports = router
