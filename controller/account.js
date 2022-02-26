@@ -47,7 +47,7 @@ class Account {
         // console.log(params)
         // token加密
         let token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
-            expiresIn: 60 * 60// 授权时效1小时
+            expiresIn: 60 * 60 * 24// 授权时效24小时
         })
         try {
             let result = await db.exec(loginSql, params)
