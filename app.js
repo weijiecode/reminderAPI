@@ -16,6 +16,7 @@ server.use('/account',require('./routers/account'))
 server.use('/test',require('./routers/test'))
 server.use('/backlog',require('./routers/backlog'))
 server.use('/mycenter',require('./routers/mycenter'))
+server.use('/clock',require('./routers/clock'))
 
 
 server.listen(5001,()=>{
