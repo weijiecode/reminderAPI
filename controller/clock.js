@@ -186,7 +186,8 @@ class Clock {
             } else {
                 resposne.json({
                     code: 201,
-                    msg: '获取所有天数的打卡记录失败'
+                    msg: '获取所有天数为空',
+                    data: result
                 })
             }
         } catch (error) {
