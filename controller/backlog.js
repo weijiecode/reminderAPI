@@ -37,7 +37,7 @@ class Backlog {
             })
         }
     }
-    // 查询待办事项
+    // 查询所有待办事项
     async selectbacklog(request, resposne, next) {
         let selectSql = 'select * from backlog where username=? order by datetime asc'
         let params = [
@@ -45,7 +45,7 @@ class Backlog {
         ]
         try {
             let result = await db.exec(selectSql, params)
-            if (result && result.length >= 1) {
+            if (result && result.length >= 0) {
                 resposne.json({
                     code: 200,
                     msg: '获取数据成功',
@@ -172,6 +172,58 @@ class Backlog {
                 resposne.json({
                     code: 201,
                     msg: '删除失败，请重试'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
+    // 获取年度待办事项数据
+    async selectbacklogdata(request, resposne, next) {
+        let selectSql = 'select datetime,colorbg from backlog where username=?'
+        let params = request.username
+        try {
+            let result = await db.exec(selectSql, params)
+            if (result && result.length >= 0) {
+                resposne.json({
+                    code: 200,
+                    msg: '获取年度待办事项数据成功',
+                    data: result
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '获取年度待办事项数据失败，请重试'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
+    // 获取待办事项数据(时间、是否完成)
+    async selectbacklogdatadone(request, resposne, next) {
+        let selectSql = 'select datetime,done from backlog where username=?'
+        let params = request.username
+        try {
+            let result = await db.exec(selectSql, params)
+            if (result && result.length >= 0) {
+                resposne.json({
+                    code: 200,
+                    msg: '获取待办事项数据成功',
+                    data: result
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '获取待办事项数据失败，请重试'
                 })
             }
         } catch (error) {
