@@ -10,10 +10,13 @@ let path = require('path');
 class Account {
     // 注册
     async register(request, resposne, next) {
-        let insertSql = 'insert into users(`username`,`password`,`createtime`)values(?,?,?)'
+        let insertSql = 'insert into users(`username`,`password`,`nickname`,`sex`,`phone`,`createtime`)values(?,?,?,?,?,?)'
         let params = [
             request.body.reg_username,
             md5(request.body.reg_password + require('../config/index').key),
+            request.body.reg_nickname,
+            request.body.reg_sex,
+            request.body.reg_phone,
             moment().format('YYYY-MM-DD HH:mm:ss')
         ]
         try {
@@ -44,11 +47,20 @@ class Account {
             request.body.username,
             md5(request.body.password + require('../config').key)
         ]
-        // console.log(params)
+        // console.log(request.body.sevenlogin)
         // token加密
-        let token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
-            expiresIn: 60 * 60 * 24// 授权时效24小时
-        })
+        // let token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
+        //     expiresIn: 60 * 60 * 24// 授权时效24小时
+        // })
+        if(request.body.sevenlogin == false) {
+            var token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
+                expiresIn: 60 * 60 * 24// 授权时效24小时
+            })
+        }else if(request.body.sevenlogin == true){
+            var token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
+                expiresIn: 60 * 60 * 24 * 7 // 授权时效7天
+            })
+        }
         try {
             let result = await db.exec(loginSql, params)
             // console.log(result[0])
@@ -80,6 +92,32 @@ class Account {
         //     },require('../config/index').tokenKey)
         // }
 
+    }
+    // 查询用户名是否被注册
+    async selectusername(request, resposne, next) {
+        let userSql = 'select username from users where username=?'
+        let parmas = request.body.username
+        try {
+            let result = await db.exec(userSql, parmas)
+            if (result && result.length >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: '该用户名已被注册',
+                    data: result
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '该用户名未被注册'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
     }
     // 查询用户数据
     async selectuserdata(request, resposne, next) {
