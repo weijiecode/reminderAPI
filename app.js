@@ -7,6 +7,7 @@ server.use(cors())
 
 // 暴露访问图片资源
 server.use('/public/upload',express.static(__dirname + '/public/upload'))
+server.use('/public/uploadeditor',express.static(__dirname + '/public/uploadeditor'))
 
 // 引入中间件
 server.use(express.urlencoded({extended:true}))
@@ -17,7 +18,8 @@ server.use('/test',require('./routers/test'))
 server.use('/backlog',require('./routers/backlog'))
 server.use('/mycenter',require('./routers/mycenter'))
 server.use('/clock',require('./routers/clock'))
-
+server.use('/message',require('./routers/message'))
+server.use('/feedback',require('./routers/feedback'))
 
 server.listen(5001,()=>{
     console.log('server up 5001')
