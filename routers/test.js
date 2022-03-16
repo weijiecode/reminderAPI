@@ -2,5 +2,5 @@ const express = require('express')
 const router = express.Router()
 const tokenK = require('../middleware/tokenKey')
 // 测试1
-router.post('/test',tokenK,require('../controller/test').testcontroller)
+router.get('/test',require('../controller/test').testcontroller)
 module.exports = router

@@ -22,7 +22,7 @@ class Account {
         try {
             let result = await db.exec(insertSql, params)
             if (result && result.affectedRows >= 1) {
-                resposne.json({ 
+                resposne.json({
                     code: 200,
                     msg: '注册成功',
                 })
@@ -52,11 +52,11 @@ class Account {
         // let token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
         //     expiresIn: 60 * 60 * 24// 授权时效24小时
         // })
-        if(request.body.sevenlogin == false) {
+        if (request.body.sevenlogin == false) {
             var token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
                 expiresIn: 60 * 60 * 24// 授权时效24小时
             })
-        }else if(request.body.sevenlogin == true){
+        } else if (request.body.sevenlogin == true) {
             var token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey, {
                 expiresIn: 60 * 60 * 24 * 7 // 授权时效7天
             })
@@ -122,9 +122,9 @@ class Account {
     // 查询用户数据
     async selectuserdata(request, resposne, next) {
         let userSql = 'select * from users where username=?'
-        let parmas = request.body.username
+        let params = request.body.username
         try {
-            let result = await db.exec(userSql, parmas)
+            let result = await db.exec(userSql, params)
             if (result && result.length >= 1) {
                 resposne.json({
                     code: 200,
@@ -146,7 +146,7 @@ class Account {
         }
     }
     // 修改用户信息
-    async updatemycenter(request, resposne, next){
+    async updatemycenter(request, resposne, next) {
         let updateSql = 'update users set nickname=?,introduction=?,sex=?,phone=?,email=? where username=?'
         let params = [
             request.body.nickname,
@@ -156,20 +156,20 @@ class Account {
             request.body.email,
             request.body.username
         ]
-        try{
-            let result = await db.exec(updateSql,params)
-            if(result && result.affectedRows >= 1){
+        try {
+            let result = await db.exec(updateSql, params)
+            if (result && result.affectedRows >= 1) {
                 resposne.json({
                     code: 200,
                     msg: '修改用户数据成功'
                 })
-            }else{
+            } else {
                 resposne.json({
                     code: 201,
                     msg: '修改用户数据失败，请重试'
                 })
             }
-        }catch(error){
+        } catch (error) {
             resposne.json({
                 code: -201,
                 msg: '服务器异常',
@@ -178,7 +178,7 @@ class Account {
         }
     }
     // 发送用户头像url
-    photouploadurl(request, resposne, next){
+    photouploadurl(request, resposne, next) {
         const file = request.file
         file.url = `http://localhost:5001/public/upload/${file.filename}`
         resposne.json({
@@ -193,23 +193,23 @@ class Account {
             request.body.photo,
             request.body.username
         ]
-        try{
-            let result = await db.exec(updateSql,params)
-            if(result && result.affectedRows >= 1){
+        try {
+            let result = await db.exec(updateSql, params)
+            if (result && result.affectedRows >= 1) {
                 resposne.json({
                     code: 200,
                     msg: '修改用户头像成功'
                 })
-                let delphoto = path.resolve(__dirname, '../public/upload/')+'/'+request.body.oldphoto.split('/').pop()
+                let delphoto = path.resolve(__dirname, '../public/upload/') + '/' + request.body.oldphoto.split('/').pop()
                 //console.log(delphoto)
-                try{fs.unlinkSync(delphoto);}catch(error){}
-            }else{
+                try { fs.unlinkSync(delphoto); } catch (error) { }
+            } else {
                 resposne.json({
                     code: 201,
                     msg: '修改用户失败，请重试'
                 })
             }
-        }catch(error){
+        } catch (error) {
             resposne.json({
                 code: -201,
                 msg: '服务器异常',
@@ -225,23 +225,77 @@ class Account {
             request.body.username,
             md5(request.body.oldpassword + require('../config/index').key)
         ]
-        try{
-            let result = await db.exec(updateSql,params)
-            if(result && result.affectedRows >= 1){
+        try {
+            let result = await db.exec(updateSql, params)
+            if (result && result.affectedRows >= 1) {
                 resposne.json({
                     code: 200,
                     msg: '修改密码成功'
                 })
-            }else {
+            } else {
                 resposne.json({
                     code: 201,
                     msg: '修改密码失败，请重试'
                 })
             }
-        }catch(error){
+        } catch (error) {
             resposne.json({
                 code: -201,
                 msg: '服务器异常'
+            })
+        }
+    }
+    // 获取所有消息列表的id
+    async selectmessageid(request, resposne, next) {
+        let selectSql = 'select id from message'
+        try {
+            let result = await db.exec(selectSql)
+            if (result && result.length >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: '获取消息id成功',
+                    data: result
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '获取消息id失败，请重试'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
+    // 给新注册的用户添加所有未读消息
+    async addmessage(request, resposne, next) {
+        let addSql = 'insert into user_message(`message_id`,`username`)values(?,?)'
+        let params = [
+            request.body.message_id,
+            request.body.username
+        ]
+        try {
+            let result = await db.exec(addSql, params)
+            if (result && result.affectedRows >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: '添加未读消息成功',
+                    data: result
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '添加未读消息失败，请重试'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
             })
         }
     }
