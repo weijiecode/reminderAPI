@@ -91,7 +91,7 @@ class Clock {
     // 删除打卡信息
     async deleteclock(request, resposne, next) {
         let deleteSql = 'delete from clock where username=?'
-        let params = request.body.username
+        let params = request.username
         try {
             let result = await db.exec(deleteSql, params)
             if (result && result.affectedRows >= 1) {
@@ -173,7 +173,7 @@ class Clock {
     async clockdays(request, resposne, next) {
         let insertSql = 'select * from clock_user where username=?'
         let params = [
-            request.body.username
+            request.username
         ]
         try {
             let result = await db.exec(insertSql, params)
@@ -201,7 +201,7 @@ class Clock {
     // 删除所有天数的打卡记录
     async deleteclockdays(request, resposne, next) {
         let deleteSql = 'delete from clock_user where username=?'
-        let params = request.body.username
+        let params = request.username
         try {
             let result = await db.exec(deleteSql, params)
             if (result && result.affectedRows >= 1) {

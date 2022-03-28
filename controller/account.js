@@ -155,8 +155,8 @@ class Account {
     }
     // 查询用户数据
     async selectuserdata(request, resposne, next) {
-        let userSql = 'select * from users where username=?'
-        let params = request.body.username
+        let userSql = 'select id,username,nickname,photo,status,phone,email,sex,introduction from users where username=?'
+        let params = request.username
         try {
             let result = await db.exec(userSql, params)
             if (result && result.length >= 1) {
@@ -225,8 +225,9 @@ class Account {
         let updateSql = 'update users set photo=? where username=?'
         let params = [
             request.body.photo,
-            request.body.username
+            request.username
         ]
+        //console.log(request.body.oldphoto)
         try {
             let result = await db.exec(updateSql, params)
             if (result && result.affectedRows >= 1) {
@@ -234,9 +235,12 @@ class Account {
                     code: 200,
                     msg: '修改用户头像成功'
                 })
-                let delphoto = path.resolve(__dirname, '../public/upload/') + '/' + request.body.oldphoto.split('/').pop()
-                //console.log(delphoto)
-                try { fs.unlinkSync(delphoto); } catch (error) { }
+                // 判断是否有旧头像，更换新头像后删除旧头像
+                if (request.body.oldphoto != null) {
+                    let delphoto = path.resolve(__dirname, '../public/upload/') + '/' + request.body.oldphoto.split('/').pop()
+                    //console.log(delphoto)
+                    try { fs.unlinkSync(delphoto); } catch (error) { }
+                }
             } else {
                 resposne.json({
                     code: 201,
@@ -256,7 +260,7 @@ class Account {
         let updateSql = 'update users set password=? where username=? and password=?'
         let params = [
             md5(request.body.newpassword + require('../config/index').key),
-            request.body.username,
+            request.username,
             md5(request.body.oldpassword + require('../config/index').key)
         ]
         try {
