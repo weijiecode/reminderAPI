@@ -11,6 +11,8 @@ router.post('/userdata',tokenK,require('../controller/account').selectuserdata)
 router.post('/updateuserdata',tokenK,require('../controller/account').updatemycenter)
 // 发送用户头像url
 router.post('/photouploadurl',upload.single('file'),tokenK,require('../controller/account').photouploadurl)
+// 移动端发送用户头像url
+router.post('/mobilephotouploadurl',upload.single('file'),tokenK,require('../controller/account').mobilephotouploadurl)
 // 修改用户头像
 router.post('/updatephoto',tokenK,require('../controller/account').updatephoto)
 // 修改密码

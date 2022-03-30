@@ -188,7 +188,7 @@ class Account {
             request.body.sex,
             request.body.phone,
             request.body.email,
-            request.body.username
+            request.username
         ]
         try {
             let result = await db.exec(updateSql, params)
@@ -219,6 +219,12 @@ class Account {
             code: 202,
             data: file
         })
+    }
+    // 移动端发送用户头像url
+    mobilephotouploadurl(request, resposne, next) {
+        const file = request.file
+        file.url = `http://localhost:5001/public/upload/${file.filename}`
+        resposne.json(file.url)
     }
     // 修改用户头像
     async updatephoto(request, resposne, next) {
