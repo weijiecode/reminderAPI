@@ -21,6 +21,7 @@ server.use('/mycenter',require('./routers/mycenter'))
 server.use('/clock',require('./routers/clock'))
 server.use('/message',require('./routers/message'))
 server.use('/feedback',require('./routers/feedback'))
+server.use('/memorial',require('./routers/memorial'))
 
 server.listen(5001,()=>{
     console.log('server up 5001')
