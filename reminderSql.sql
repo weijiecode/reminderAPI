@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 07/05/2022 02:47:09
+ Date: 10/05/2022 00:59:24
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `backlog`  (
   `createtime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `done` int(0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 140 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 142 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of backlog
@@ -124,6 +124,8 @@ INSERT INTO `backlog` VALUES (136, 'root', '13123', '2022-05-04 02:03', '#icon-s
 INSERT INTO `backlog` VALUES (137, 'root', '1', '2022-05-04 00:02', '#icon-life', '#7766E7', '2022-05-04 23:43:31', 0);
 INSERT INTO `backlog` VALUES (138, 'root', '6666', '2022-05-04 00:02', '#icon-study', '#FFCD00', '2022-05-04 23:46:22', 0);
 INSERT INTO `backlog` VALUES (139, 'root', '2222', '2022-05-05 01:02', '#icon-life', '#7766E7', '2022-05-05 16:38:09', 1);
+INSERT INTO `backlog` VALUES (140, 'root', '滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴', '2022-05-07 00:02', '#icon-life', '#7766E7', '2022-05-07 14:03:51', 0);
+INSERT INTO `backlog` VALUES (141, 'root', 'color: #aaa;     font-size: 12', '2022-05-08 00:02', '#icon-life', '#7766E7', '2022-05-08 23:38:17', 0);
 
 -- ----------------------------
 -- Table structure for clock
@@ -176,6 +178,26 @@ INSERT INTO `clock_user` VALUES (72, 'root', '2022-04-28');
 INSERT INTO `clock_user` VALUES (73, 'root', '2022-05-04');
 
 -- ----------------------------
+-- Table structure for diary
+-- ----------------------------
+DROP TABLE IF EXISTS `diary`;
+CREATE TABLE `diary`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `datetime` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `weather` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of diary
+-- ----------------------------
+INSERT INTO `diary` VALUES (1, 'root', '今天天气就这啊', '2022-09-10 16:28:26', 'sun');
+INSERT INTO `diary` VALUES (2, 'root', '111211', '2022-09-10 16:28:26', 'sum');
+INSERT INTO `diary` VALUES (3, 'root', '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试', '2022-10-09 20:20:10', 'sum');
+
+-- ----------------------------
 -- Table structure for feedback
 -- ----------------------------
 DROP TABLE IF EXISTS `feedback`;
@@ -198,6 +220,32 @@ INSERT INTO `feedback` VALUES (3, 'root', '123', '<p>1231<img src=\"http://local
 INSERT INTO `feedback` VALUES (4, 'root', '123', '<p>1231<img src=\"http://localhost:5001/public/uploadeditor/1eb7481e2fb1d27e24ace6e94054976c\"></p>', '2022-03-13 12:29:25', NULL);
 INSERT INTO `feedback` VALUES (5, 'root', '123', '<p>1231<img src=\"http://localhost:5001/public/uploadeditor/d2dc62eaa72d485242d21193a27c7c55\"></p>', '2022-03-13 12:29:39', NULL);
 INSERT INTO `feedback` VALUES (6, 'root', '123', '<p>123<img src=\"http://localhost:5001/public/uploadeditor/3bb74917d947ae7ea53c376945bd4c8f\"></p>', '2022-03-13 12:30:22', NULL);
+INSERT INTO `feedback` VALUES (7, 'root', 'title', '<p>123<img src=\"http://localhost:5001/public/uploadeditor/12f0fb0709f50e643097e64117e48032\"></p>', '2022-03-29 19:21:11', NULL);
+
+-- ----------------------------
+-- Table structure for memo
+-- ----------------------------
+DROP TABLE IF EXISTS `memo`;
+CREATE TABLE `memo`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `title` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `createdatetime` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of memo
+-- ----------------------------
+INSERT INTO `memo` VALUES (1, 'root', '123', '6666666666666', '2022-09-10 16:28:26');
+INSERT INTO `memo` VALUES (2, 'root', '111', '777777', '2022-09-11 16:28:26');
+INSERT INTO `memo` VALUES (4, 'root', '0000', '0000000', '2022-05-07 16:28:26');
+INSERT INTO `memo` VALUES (6, 'root', '1', '1', '2022-05-09 23:39:54');
+INSERT INTO `memo` VALUES (7, 'root', '2', '3', '2022-05-09 23:40:00');
+INSERT INTO `memo` VALUES (8, 'root', '3', '4', '2022-05-09 23:40:04');
+INSERT INTO `memo` VALUES (9, 'root', '5', '5', '2022-05-09 23:40:08');
+INSERT INTO `memo` VALUES (10, 'root', '6', '6', '2022-05-09 23:40:11');
 
 -- ----------------------------
 -- Table structure for memorial
@@ -210,7 +258,7 @@ CREATE TABLE `memorial`  (
   `datetime` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `nums` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of memorial
@@ -221,6 +269,8 @@ INSERT INTO `memorial` VALUES (4, 'root', '7777', '2024-05-06', NULL);
 INSERT INTO `memorial` VALUES (6, 'root', 'ttttt', '2022-05-07', NULL);
 INSERT INTO `memorial` VALUES (11, 'root', '12321312', '2022-05-07', NULL);
 INSERT INTO `memorial` VALUES (12, 'root', '12312', '2022-05-07', NULL);
+INSERT INTO `memorial` VALUES (17, 'root', '1111122222', '2022-05-07', NULL);
+INSERT INTO `memorial` VALUES (18, 'root', '00000000', '2022-05-07', NULL);
 
 -- ----------------------------
 -- Table structure for message
@@ -298,14 +348,14 @@ CREATE TABLE `users`  (
   `introduction` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (1, 'root', '你吃晚饭了吗', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '15207054150', 'http://localhost:5001/public/upload/933d4dbfb38111f45c100cd921095495', 'weijiecode@163.com', '2022-01-31 02:28:22', 1, '好好学习，天天向上');
 INSERT INTO `users` VALUES (2, 'root2', '我吃晚饭', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '1253669654', 'http://localhost:5001/public/upload/3586c28132b111b4a6bc381fb320b689', 'weqw4242@qq.com', '2022-01-31 02:29:39', 0, 'good good studay');
-INSERT INTO `users` VALUES (3, 'root3', '测试测试', 'b9a44f06013c2cb37e18a7458b66e83c', 1, NULL, 'http://localhost:5001/public/upload/3d4d1923b85a575d10efe84b1a522592', '245619254@qq.com', '2022-02-13 16:35:32', 0, NULL);
+INSERT INTO `users` VALUES (3, 'root3', '测试测试', 'b9a44f06013c2cb37e18a7458b66e83c', 1, NULL, 'http://localhost:5001/public/upload/3d4d1923b85a575d10efe84b1a522592', '245619254@qq.com', '2022-02-13 16:35:32', 1, NULL);
 INSERT INTO `users` VALUES (4, 'root4', '123', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '19970591880', 'http://localhost:5001/public/upload/fafaaa73bfe97a6e30281dd86b39c3cd', NULL, '2022-03-10 21:25:08', 0, NULL);
 INSERT INTO `users` VALUES (5, 'root5', '123', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '', 'http://localhost:5001/public/upload/7822c4a626fcc6f7bd2efc60b9ea3041', NULL, '2022-03-10 21:27:26', 1, NULL);
 INSERT INTO `users` VALUES (6, 'root6', '121', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '', 'http://localhost:5001/public/upload/792b99fb57c908cf187845b5473de08d', '@undefined', '2022-03-10 21:28:47', 0, NULL);
