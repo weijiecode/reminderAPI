@@ -30,12 +30,12 @@ class diary {
     }
     // 新增日记数据 
     async adddiary(request, resposne, next) {
-        let insertSql = 'insert into diary(`username`,`weather`,`content`,`createdatetime`)values(?,?,?,?)'
+        let insertSql = 'insert into diary(`username`,`weather`,`content`,`datetime`)values(?,?,?,?)'
         let params = [
             request.username,
             request.body.weather,
             request.body.content,
-            moment().format('YYYY-MM-DD HH:mm:ss')
+            request.body.datetime
         ]
         try{
             let result = await db.exec(insertSql,params)
@@ -60,7 +60,7 @@ class diary {
     }
     // 修改日记数据
     async updatediary(request, resposne, next) {
-        let updateSql = 'update diary set weather=?,content=?where id=? and username=?'
+        let updateSql = 'update diary set weather=?,content=? where id=? and username=?'
         let params = [
             request.body.weather,
             request.body.content,

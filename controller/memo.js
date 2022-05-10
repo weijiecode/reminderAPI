@@ -4,7 +4,7 @@ const moment = require('moment')
 class memo {
     // 查询用户所有备忘录数据
     async selectmemo(request, resposne, next) {
-        let selectSql = 'select * from memo where username=? order by createdatetime desc'
+        let selectSql = 'select * from memo where username=? order by datetime desc'
         let params = request.username
         try {
             let result = await db.exec(selectSql, params)
@@ -30,7 +30,7 @@ class memo {
     }
     // 新增备忘录数据 
     async addmemo(request, resposne, next) {
-        let insertSql = 'insert into memo(`username`,`title`,`content`,`createdatetime`)values(?,?,?,?)'
+        let insertSql = 'insert into memo(`username`,`title`,`content`,`datetime`)values(?,?,?,?)'
         let params = [
             request.username,
             request.body.title,
@@ -60,10 +60,11 @@ class memo {
     }
     // 修改备忘录数据
     async updatememo(request, resposne, next) {
-        let updateSql = 'update memo set title=?,content=?where id=? and username=?'
+        let updateSql = 'update memo set title=?,content=?,datetime=? where id=? and username=?'
         let params = [
             request.body.title,
             request.body.content,
+            moment().format('YYYY-MM-DD HH:mm:ss'),
             request.body.id,
             request.username
         ]
