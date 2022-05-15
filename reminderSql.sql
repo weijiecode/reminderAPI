@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80028
  Source Host           : localhost:3306
- Source Schema         : reminderSql
+ Source Schema         : remindersql
 
  Target Server Type    : MySQL
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 10/05/2022 18:20:04
+ Date: 16/05/2022 02:33:59
 */
 
 SET NAMES utf8mb4;
@@ -21,25 +21,23 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for backlog
 -- ----------------------------
 DROP TABLE IF EXISTS `backlog`;
-CREATE TABLE `backlog` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `backlog`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `contents` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `datetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `classvalue` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `colorbg` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `createtime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `done` int NOT NULL DEFAULT '0',
+  `done` int(0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 143 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of backlog
 -- ----------------------------
-BEGIN;
 INSERT INTO `backlog` VALUES (2, 'root', '1234', '2022-05-01 00:05', '#icon-health', '#1DBD84', '2022-02-10 03:33:59', 1);
 INSERT INTO `backlog` VALUES (3, 'root', '12345', '2022-05-01 00:05', '#icon-social', '#518BF1', '2022-02-10 03:38:03', 0);
-INSERT INTO `backlog` VALUES (4, 'root', '1111', '2023-01-01 19:50', '#icon-life', '#7766E7', '2022-02-10 04:33:22', 0);
 INSERT INTO `backlog` VALUES (7, 'root', 'test', '2022-03-06 21:13', '#icon-work', '#518BF1', '2022-02-11 02:20:47', 1);
 INSERT INTO `backlog` VALUES (8, 'root', 'test', '2022-03-06 21:56', '#icon-work', '#518BF1', '2022-02-13 03:59:09', 1);
 INSERT INTO `backlog` VALUES (12, 'root2', '123', '2022-01-31 02:28', '#icon-work', '#518BF1', '2022-02-13 04:57:32', 0);
@@ -51,15 +49,13 @@ INSERT INTO `backlog` VALUES (29, 'root', '234234', '2022-05-01 00:05', '#icon-s
 INSERT INTO `backlog` VALUES (30, 'root', '324234', '2022-05-01 00:06', '#icon-study', '#FFCD00', '2022-02-20 20:08:40', 0);
 INSERT INTO `backlog` VALUES (31, 'root', '1', '2022-03-06 21:14', '#icon-life', '#7766E7', '2022-02-20 20:16:59', 1);
 INSERT INTO `backlog` VALUES (33, 'root', '测试', '2022-04-03 12:30', '#icon-life', '#7766E7', '2022-02-21 16:52:23', 1);
-INSERT INTO `backlog` VALUES (34, 'root', '测试2', '2022-06-01 19:50', '#icon-life', '#7766E7', '2022-02-21 16:52:31', 1);
-INSERT INTO `backlog` VALUES (35, 'root', '测试3', '2022-07-03 16:52', '#icon-life', '#7766E7', '2022-02-21 16:52:39', 0);
+INSERT INTO `backlog` VALUES (34, 'root', '测试2', '2022-05-11 06:00', '#icon-other', '#C4C4C4', '2022-02-21 16:52:31', 1);
 INSERT INTO `backlog` VALUES (36, 'root', '测试4', '2022-03-06 21:56', '#icon-work', '#518BF1', '2022-02-21 16:52:51', 1);
 INSERT INTO `backlog` VALUES (37, 'root', 'test', '2022-05-01 00:06', '#icon-study', '#FFCD00', '2022-02-22 22:33:42', 1);
 INSERT INTO `backlog` VALUES (39, 'root', '乌克兰', '2022-04-30 03:02', '#icon-health', '#1DBD84', '2022-02-25 23:31:06', 1);
-INSERT INTO `backlog` VALUES (40, 'root', '打乌克兰', '2022-12-03 00:00', '#icon-life', '#7766E7', '2022-02-25 23:31:22', 1);
+INSERT INTO `backlog` VALUES (40, 'root', '打乌克兰123', '2022-05-10 01:01', '#icon-life', '#7766E7', '2022-02-25 23:31:22', 0);
 INSERT INTO `backlog` VALUES (43, 'root', '1', '2022-03-07 11:57', '#icon-life', '#7766E7', '2022-03-01 14:05:40', 1);
 INSERT INTO `backlog` VALUES (44, 'root', '1', '2022-05-01 00:05', '#icon-life', '#7766E7', '2022-03-02 20:46:39', 1);
-INSERT INTO `backlog` VALUES (47, 'root', '阿达', '2022-07-14 00:00', '#icon-life', '#7766E7', '2022-03-03 21:18:44', 0);
 INSERT INTO `backlog` VALUES (48, 'root', '324', '2022-04-30 03:02', '#icon-other', '#C4C4C4', '2022-03-03 21:19:31', 0);
 INSERT INTO `backlog` VALUES (50, 'root', '123', '2022-04-30 03:02', '#icon-health', '#1DBD84', '2022-03-04 16:25:47', 0);
 INSERT INTO `backlog` VALUES (51, 'root3', '12', '2022-03-07 16:09', '#icon-work', '#518BF1', '2022-03-07 16:09:04', 1);
@@ -118,51 +114,47 @@ INSERT INTO `backlog` VALUES (129, 'root', '就欧派', '2022-05-02 15:14', '#ic
 INSERT INTO `backlog` VALUES (130, 'root', '789', '2022-05-02 15:15', '#icon-work', '#518BF1', '2022-05-02 15:15:05', 0);
 INSERT INTO `backlog` VALUES (133, 'root', 'ttttttt', '2022-05-04 02:01', '#icon-life', '#7766E7', '2022-05-04 22:15:27', 1);
 INSERT INTO `backlog` VALUES (134, 'root', 'ttt', '2022-05-04 02:01', '#icon-life', '#7766E7', '2022-05-04 22:18:38', 0);
-INSERT INTO `backlog` VALUES (135, 'root', '1111', '2022-05-04 02:02', '#icon-work', '#518BF1', '2022-05-04 22:26:39', 0);
-INSERT INTO `backlog` VALUES (136, 'root', '13123', '2022-05-04 02:03', '#icon-study', '#FFCD00', '2022-05-04 22:27:48', 0);
+INSERT INTO `backlog` VALUES (135, 'root', '1111', '2022-05-04 00:aN', '#icon-life', '#7766E7', '2022-05-04 22:26:39', 0);
+INSERT INTO `backlog` VALUES (136, 'root', '13123', '2022-05-04 13:00', '#icon-study', '#FFCD00', '2022-05-04 22:27:48', 1);
 INSERT INTO `backlog` VALUES (137, 'root', '1', '2022-05-04 00:02', '#icon-life', '#7766E7', '2022-05-04 23:43:31', 0);
-INSERT INTO `backlog` VALUES (138, 'root', '6666', '2022-05-04 00:02', '#icon-study', '#FFCD00', '2022-05-04 23:46:22', 0);
+INSERT INTO `backlog` VALUES (138, 'root', '6666', '2022-05-04 00:02', '#icon-study', '#FFCD00', '2022-05-04 23:46:22', 1);
 INSERT INTO `backlog` VALUES (139, 'root', '2222', '2022-05-05 01:02', '#icon-life', '#7766E7', '2022-05-05 16:38:09', 1);
-INSERT INTO `backlog` VALUES (140, 'root', '滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴', '2022-05-07 00:02', '#icon-life', '#7766E7', '2022-05-07 14:03:51', 0);
-INSERT INTO `backlog` VALUES (141, 'root', 'color: #aaa;     font-size: 12', '2022-05-08 00:02', '#icon-life', '#7766E7', '2022-05-08 23:38:17', 0);
-COMMIT;
+INSERT INTO `backlog` VALUES (140, 'root', '滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴滴', '2022-05-07 06:00', '#icon-other', '#C4C4C4', '2022-05-07 14:03:51', 1);
+INSERT INTO `backlog` VALUES (141, 'root', 'color: #aaa;     font-size: 12', '2022-05-10 09:00', '#icon-other', '#C4C4C4', '2022-05-08 23:38:17', 1);
 
 -- ----------------------------
 -- Table structure for clock
 -- ----------------------------
 DROP TABLE IF EXISTS `clock`;
-CREATE TABLE `clock` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `content` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `daytype` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `startdatetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+CREATE TABLE `clock`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `content` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `daytype` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `startdatetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clock
 -- ----------------------------
-BEGIN;
 INSERT INTO `clock` VALUES (10, 'root', '学习', '21', '2022-03-01');
 INSERT INTO `clock` VALUES (11, 'root3', '1', '7', '2022-03-08');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for clock_user
 -- ----------------------------
 DROP TABLE IF EXISTS `clock_user`;
-CREATE TABLE `clock_user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `donedatetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+CREATE TABLE `clock_user`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `donedatetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clock_user
 -- ----------------------------
-BEGIN;
 INSERT INTO `clock_user` VALUES (36, 'root', '2022-03-02');
 INSERT INTO `clock_user` VALUES (41, 'root', '2022-03-01');
 INSERT INTO `clock_user` VALUES (52, 'root', '2022-03-03');
@@ -179,25 +171,23 @@ INSERT INTO `clock_user` VALUES (70, 'root', '2022-04-09');
 INSERT INTO `clock_user` VALUES (71, 'root', '2022-04-27');
 INSERT INTO `clock_user` VALUES (72, 'root', '2022-04-28');
 INSERT INTO `clock_user` VALUES (73, 'root', '2022-05-04');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for diary
 -- ----------------------------
 DROP TABLE IF EXISTS `diary`;
-CREATE TABLE `diary` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `diary`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `datetime` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `weather` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `weather` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of diary
 -- ----------------------------
-BEGIN;
 INSERT INTO `diary` VALUES (1, 'root', '今天天气就这啊', '2022/05/10 15:08 周二', '雨天');
 INSERT INTO `diary` VALUES (2, 'root', '111211', '2022/05/10 15:08 周二', '雨天');
 INSERT INTO `diary` VALUES (3, 'root', '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试', '2022/05/10 15:08 周二', '雨天');
@@ -211,28 +201,24 @@ INSERT INTO `diary` VALUES (10, 'root', '333333', '2022/05/10 15:08 周二', '�
 INSERT INTO `diary` VALUES (11, 'root', '123123123123', '2022/05/10 15:08 周二', '晴天');
 INSERT INTO `diary` VALUES (12, 'root', 'ttttt', '2022/05/10 15:11 周二', '晴天');
 INSERT INTO `diary` VALUES (13, 'root', '0000000000', '2022/05/10 15:40 周二', '晴天');
-INSERT INTO `diary` VALUES (14, 'root', '123123101', '2022/05/10 15:42 周二', '下雪');
-INSERT INTO `diary` VALUES (15, 'root', '11111', '2022/05/10 16:06 周二', '晴天');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for feedback
 -- ----------------------------
 DROP TABLE IF EXISTS `feedback`;
-CREATE TABLE `feedback` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+CREATE TABLE `feedback`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `updatetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `photourl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `updatetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `photourl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of feedback
 -- ----------------------------
-BEGIN;
 INSERT INTO `feedback` VALUES (1, 'root', '123', '<p>1231231</p>', NULL, NULL);
 INSERT INTO `feedback` VALUES (2, 'root', '123', '<p>123123<img src=\"http://localhost:5001/public/uploadeditor/6082142832aec6d1f505c1aad8a8e0b8\"></p>', '2022-03-13 12:23:01', NULL);
 INSERT INTO `feedback` VALUES (3, 'root', '123', '<p>1231<img src=\"http://localhost:5001/public/uploadeditor/1eb7481e2fb1d27e24ace6e94054976c\"></p>', '2022-03-13 12:25:48', NULL);
@@ -240,25 +226,23 @@ INSERT INTO `feedback` VALUES (4, 'root', '123', '<p>1231<img src=\"http://local
 INSERT INTO `feedback` VALUES (5, 'root', '123', '<p>1231<img src=\"http://localhost:5001/public/uploadeditor/d2dc62eaa72d485242d21193a27c7c55\"></p>', '2022-03-13 12:29:39', NULL);
 INSERT INTO `feedback` VALUES (6, 'root', '123', '<p>123<img src=\"http://localhost:5001/public/uploadeditor/3bb74917d947ae7ea53c376945bd4c8f\"></p>', '2022-03-13 12:30:22', NULL);
 INSERT INTO `feedback` VALUES (7, 'root', 'title', '<p>123<img src=\"http://localhost:5001/public/uploadeditor/12f0fb0709f50e643097e64117e48032\"></p>', '2022-03-29 19:21:11', NULL);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for memo
 -- ----------------------------
 DROP TABLE IF EXISTS `memo`;
-CREATE TABLE `memo` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `memo`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `title` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `datetime` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of memo
 -- ----------------------------
-BEGIN;
 INSERT INTO `memo` VALUES (1, 'root', '123', '6666666666666', '2022-09-10 16:28:26');
 INSERT INTO `memo` VALUES (2, 'root', '111', '1111', '2022-05-10 14:57:25');
 INSERT INTO `memo` VALUES (4, 'root', '0000', '0000000', '2022-05-07 16:28:26');
@@ -267,25 +251,23 @@ INSERT INTO `memo` VALUES (7, 'root', '2', '3', '2022-05-09 23:40:00');
 INSERT INTO `memo` VALUES (8, 'root', '3', '4', '2022-05-09 23:40:04');
 INSERT INTO `memo` VALUES (9, 'root', '5', '5', '2022-05-09 23:40:08');
 INSERT INTO `memo` VALUES (10, 'root', '6', '6', '2022-05-09 23:40:11');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for memorial
 -- ----------------------------
 DROP TABLE IF EXISTS `memorial`;
-CREATE TABLE `memorial` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+CREATE TABLE `memorial`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `content` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `datetime` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `nums` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `datetime` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `nums` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of memorial
 -- ----------------------------
-BEGIN;
 INSERT INTO `memorial` VALUES (1, 'root', '生日1', '2022-06-09', NULL);
 INSERT INTO `memorial` VALUES (3, 'root', 'mmmm', '2023-05-03', NULL);
 INSERT INTO `memorial` VALUES (4, 'root', '7777', '2024-05-06', NULL);
@@ -294,96 +276,147 @@ INSERT INTO `memorial` VALUES (11, 'root', '12321312', '2022-05-07', NULL);
 INSERT INTO `memorial` VALUES (12, 'root', '12312', '2022-05-07', NULL);
 INSERT INTO `memorial` VALUES (17, 'root', '1111122222', '2022-05-07', NULL);
 INSERT INTO `memorial` VALUES (18, 'root', '00000000', '2022-05-07', NULL);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for message
 -- ----------------------------
 DROP TABLE IF EXISTS `message`;
-CREATE TABLE `message` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `content` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `datetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+CREATE TABLE `message`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `title` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `content` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `datetime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of message
 -- ----------------------------
-BEGIN;
 INSERT INTO `message` VALUES (1, '【通知】', '消息功能已上线~~~', '2022-03-12');
 INSERT INTO `message` VALUES (2, '【官方】', '测试测试', '2022-03-12');
-COMMIT;
+
+-- ----------------------------
+-- Table structure for tally
+-- ----------------------------
+DROP TABLE IF EXISTS `tally`;
+CREATE TABLE `tally`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `tallytype` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `remark` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `num` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `datetime` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tally
+-- ----------------------------
+INSERT INTO `tally` VALUES (1, 'root', '餐饮', '123。。', '10', '2022/05/14');
+INSERT INTO `tally` VALUES (2, 'root', '餐饮', '', '12', '2022/05/14');
+INSERT INTO `tally` VALUES (3, 'root', '餐饮', '', '0.01', '2022/05/19');
+INSERT INTO `tally` VALUES (4, 'root', '餐饮', '123', '6', '2022/05/14');
+INSERT INTO `tally` VALUES (5, 'root', '餐饮', '123', '3', '2022/05/15');
+INSERT INTO `tally` VALUES (6, 'root', '餐饮', '', '36', '2022/05/15');
+INSERT INTO `tally` VALUES (7, 'root', '餐饮', '', '8.00', '2022/05/14');
+INSERT INTO `tally` VALUES (8, 'root', '餐饮', '测试', '9.00', '2022/05/15');
+INSERT INTO `tally` VALUES (9, 'root', '餐饮', '123', '3366', '2022/06/15');
+INSERT INTO `tally` VALUES (10, 'root', '工资', '', '3', '2022/05/15');
+INSERT INTO `tally` VALUES (11, 'root', '餐饮', '', '1', '2022/05/15');
+INSERT INTO `tally` VALUES (12, 'root', '工资', '', '99', '2022/05/15');
+INSERT INTO `tally` VALUES (13, 'root', '餐饮', '', '11', '2022/05/15');
+INSERT INTO `tally` VALUES (14, 'root', '餐饮', '', '12', '2022/05/15');
+INSERT INTO `tally` VALUES (15, 'root', '工资', '', '62', '2022/05/15');
+INSERT INTO `tally` VALUES (16, 'root', '工资', '测试', '12', '2022/05/15');
+INSERT INTO `tally` VALUES (17, 'root', '餐饮', '测试2', '-55', '2022/05/15');
+INSERT INTO `tally` VALUES (18, 'root', '工资', '', '23', '2022/05/15');
+INSERT INTO `tally` VALUES (19, 'root', '餐饮', '', '-21', '2022/05/15');
+INSERT INTO `tally` VALUES (20, 'root', '工资', '测试11', '26.00', '2022/05/15');
+INSERT INTO `tally` VALUES (21, 'root', '餐饮', '测试22', '-23', '2022/05/15');
+INSERT INTO `tally` VALUES (22, 'root', '工资', '', '6666666525', '2022/05/15');
+INSERT INTO `tally` VALUES (23, 'root', '工资', '', '36.12', '2022/05/15');
+INSERT INTO `tally` VALUES (24, 'root', '工资', '', '36', '2022/05/15');
+INSERT INTO `tally` VALUES (25, 'root', '工资', '', '12.12', '2022/05/15');
+INSERT INTO `tally` VALUES (26, 'root', '餐饮', '', '-12', '2022/05/15');
+INSERT INTO `tally` VALUES (27, 'root', '红包', '', '3', '2022/05/15');
+INSERT INTO `tally` VALUES (28, 'root', '红包', '', '22', '2022/05/15');
+INSERT INTO `tally` VALUES (29, 'root', '日用', '', '-3', '2022/05/15');
+INSERT INTO `tally` VALUES (30, 'root', '住房', '', '-2', '2022/05/15');
+INSERT INTO `tally` VALUES (31, 'root', '旅行', '', '-9', '2022/05/15');
+INSERT INTO `tally` VALUES (32, 'root', '旅行', '', '-1', '2022/05/15');
+INSERT INTO `tally` VALUES (33, 'root', '工资', '', '3.00', '2022/05/16');
+INSERT INTO `tally` VALUES (34, 'root', '住房', '租房水电', '-500', '2022/05/16');
+INSERT INTO `tally` VALUES (35, 'root', '工资', '', '123', '2022/05/16');
+INSERT INTO `tally` VALUES (36, 'root', '住房', '', '-188', '2022/05/16');
+INSERT INTO `tally` VALUES (37, 'root', '住房', '', '-39', '2022/05/16');
+INSERT INTO `tally` VALUES (38, 'root', '住房', '', '-123.7', '2022/05/16');
+INSERT INTO `tally` VALUES (39, 'root', '住房', '', '-366', '2022/05/16');
+INSERT INTO `tally` VALUES (40, 'root', '住房', '', '-100', '2022/05/16');
+INSERT INTO `tally` VALUES (41, 'root', '住房', '', '-1', '2022/05/16');
 
 -- ----------------------------
 -- Table structure for user_message
 -- ----------------------------
 DROP TABLE IF EXISTS `user_message`;
-CREATE TABLE `user_message` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `message_id` int DEFAULT NULL,
-  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `isread` int DEFAULT '0',
+CREATE TABLE `user_message`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `message_id` int(0) NULL DEFAULT NULL,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `isread` int(0) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_message
 -- ----------------------------
-BEGIN;
 INSERT INTO `user_message` VALUES (1, 1, 'root', 1);
 INSERT INTO `user_message` VALUES (2, 2, 'root', 0);
 INSERT INTO `user_message` VALUES (3, 1, 'root16', 0);
 INSERT INTO `user_message` VALUES (4, 2, 'root16', 0);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for user_position
 -- ----------------------------
 DROP TABLE IF EXISTS `user_position`;
-CREATE TABLE `user_position` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `province` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `city` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `district` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `street` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `latitude` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `longitude` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+CREATE TABLE `user_position`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `province` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `city` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `district` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `street` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `latitude` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `longitude` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_position
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
   `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `nickname` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `status` int NOT NULL DEFAULT '1',
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `email` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `createtime` datetime NOT NULL,
-  `sex` int DEFAULT '0',
-  `introduction` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `status` int(0) NOT NULL DEFAULT 1,
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `email` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `createtime` datetime(0) NOT NULL,
+  `sex` int(0) NULL DEFAULT 0,
+  `introduction` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `name` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+  UNIQUE INDEX `name`(`username`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-BEGIN;
 INSERT INTO `users` VALUES (1, 'root', '你吃晚饭了吗', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '15207054150', 'http://localhost:5001/public/upload/933d4dbfb38111f45c100cd921095495', 'weijiecode@163.com', '2022-01-31 02:28:22', 1, '好好学习，天天向上');
 INSERT INTO `users` VALUES (2, 'root2', '我吃晚饭', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '1253669654', 'http://localhost:5001/public/upload/3586c28132b111b4a6bc381fb320b689', 'weqw4242@qq.com', '2022-01-31 02:29:39', 0, 'good good studay');
 INSERT INTO `users` VALUES (3, 'root3', '测试测试', 'b9a44f06013c2cb37e18a7458b66e83c', 1, NULL, 'http://localhost:5001/public/upload/3d4d1923b85a575d10efe84b1a522592', '245619254@qq.com', '2022-02-13 16:35:32', 1, NULL);
@@ -403,6 +436,5 @@ INSERT INTO `users` VALUES (17, 'root16', '5524', 'b9a44f06013c2cb37e18a7458b66e
 INSERT INTO `users` VALUES (18, 'root20', '123', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '', NULL, NULL, '2022-03-23 10:54:46', 1, NULL);
 INSERT INTO `users` VALUES (19, 'root21', 'ceshi测试', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '12345678900', NULL, NULL, '2022-03-23 11:01:29', 0, NULL);
 INSERT INTO `users` VALUES (20, 'root22', '234', 'b9a44f06013c2cb37e18a7458b66e83c', 1, '', NULL, NULL, '2022-03-23 11:04:54', 1, NULL);
-COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

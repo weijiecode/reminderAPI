@@ -24,6 +24,7 @@ server.use('/feedback',require('./routers/feedback'))
 server.use('/memorial',require('./routers/memorial'))
 server.use('/memo',require('./routers/memo'))
 server.use('/diary',require('./routers/diary'))
+server.use('/tally',require('./routers/tally'))
 
 server.listen(5001,()=>{
     console.log('server up 5001')
