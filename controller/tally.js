@@ -60,11 +60,12 @@ class tally {
     }
     // 修改记账数据
     async updatetally(request, resposne, next) {
-        let updateSql = 'update tally set title=?,content=?,datetime=? where id=? and username=?'
+        let updateSql = 'update tally set tallytype=?,datetime=?,remark=?,num=? where id=? and username=?'
         let params = [
-            request.body.title,
-            request.body.content,
-            moment().format('YYYY-MM-DD HH:mm:ss'),
+            request.body.tallytype,
+            request.body.datetime,
+            request.body.remark,
+            request.body.num,
             request.body.id,
             request.username
         ]
