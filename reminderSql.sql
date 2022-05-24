@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 16/05/2022 02:33:59
+ Date: 24/05/2022 12:17:17
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `backlog`  (
   `createtime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `done` int(0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 143 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 141 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of backlog
@@ -183,7 +183,7 @@ CREATE TABLE `diary`  (
   `datetime` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `weather` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of diary
@@ -263,7 +263,7 @@ CREATE TABLE `memorial`  (
   `datetime` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `nums` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of memorial
@@ -307,25 +307,25 @@ CREATE TABLE `tally`  (
   `num` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `datetime` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tally
 -- ----------------------------
-INSERT INTO `tally` VALUES (1, 'root', '餐饮', '123。。', '10', '2022/05/14');
-INSERT INTO `tally` VALUES (2, 'root', '餐饮', '', '12', '2022/05/14');
-INSERT INTO `tally` VALUES (3, 'root', '餐饮', '', '0.01', '2022/05/19');
-INSERT INTO `tally` VALUES (4, 'root', '餐饮', '123', '6', '2022/05/14');
-INSERT INTO `tally` VALUES (5, 'root', '餐饮', '123', '3', '2022/05/15');
-INSERT INTO `tally` VALUES (6, 'root', '餐饮', '', '36', '2022/05/15');
-INSERT INTO `tally` VALUES (7, 'root', '餐饮', '', '8.00', '2022/05/14');
-INSERT INTO `tally` VALUES (8, 'root', '餐饮', '测试', '9.00', '2022/05/15');
-INSERT INTO `tally` VALUES (9, 'root', '餐饮', '123', '3366', '2022/06/15');
+INSERT INTO `tally` VALUES (1, 'root', '餐饮', '123。。', '-10', '2022/05/14');
+INSERT INTO `tally` VALUES (2, 'root', '餐饮', '', '-12', '2022/05/14');
+INSERT INTO `tally` VALUES (3, 'root', '餐饮', '', '-0.01', '2022/05/19');
+INSERT INTO `tally` VALUES (4, 'root', '餐饮', '123', '-6', '2022/05/14');
+INSERT INTO `tally` VALUES (5, 'root', '餐饮', '123', '-3', '2022/05/15');
+INSERT INTO `tally` VALUES (6, 'root', '餐饮', '', '-36', '2022/05/15');
+INSERT INTO `tally` VALUES (7, 'root', '餐饮', '', '-8.00', '2022/05/14');
+INSERT INTO `tally` VALUES (8, 'root', '餐饮', '测试', '-9.00', '2022/05/15');
+INSERT INTO `tally` VALUES (9, 'root', '餐饮', '123', '-3366', '2022/06/15');
 INSERT INTO `tally` VALUES (10, 'root', '工资', '', '3', '2022/05/15');
-INSERT INTO `tally` VALUES (11, 'root', '餐饮', '', '1', '2022/05/15');
+INSERT INTO `tally` VALUES (11, 'root', '餐饮', '', '-1', '2022/05/15');
 INSERT INTO `tally` VALUES (12, 'root', '工资', '', '99', '2022/05/15');
-INSERT INTO `tally` VALUES (13, 'root', '餐饮', '', '11', '2022/05/15');
-INSERT INTO `tally` VALUES (14, 'root', '餐饮', '', '12', '2022/05/15');
+INSERT INTO `tally` VALUES (13, 'root', '餐饮', '', '-11', '2022/05/15');
+INSERT INTO `tally` VALUES (14, 'root', '餐饮', '', '-12', '2022/05/15');
 INSERT INTO `tally` VALUES (15, 'root', '工资', '', '62', '2022/05/15');
 INSERT INTO `tally` VALUES (16, 'root', '工资', '测试', '12', '2022/05/15');
 INSERT INTO `tally` VALUES (17, 'root', '餐饮', '测试2', '-55', '2022/05/15');
@@ -344,7 +344,6 @@ INSERT INTO `tally` VALUES (29, 'root', '日用', '', '-3', '2022/05/15');
 INSERT INTO `tally` VALUES (30, 'root', '住房', '', '-2', '2022/05/15');
 INSERT INTO `tally` VALUES (31, 'root', '旅行', '', '-9', '2022/05/15');
 INSERT INTO `tally` VALUES (32, 'root', '旅行', '', '-1', '2022/05/15');
-INSERT INTO `tally` VALUES (33, 'root', '工资', '', '3.00', '2022/05/16');
 INSERT INTO `tally` VALUES (34, 'root', '住房', '租房水电', '-500', '2022/05/16');
 INSERT INTO `tally` VALUES (35, 'root', '工资', '', '123', '2022/05/16');
 INSERT INTO `tally` VALUES (36, 'root', '住房', '', '-188', '2022/05/16');
@@ -353,6 +352,40 @@ INSERT INTO `tally` VALUES (38, 'root', '住房', '', '-123.7', '2022/05/16');
 INSERT INTO `tally` VALUES (39, 'root', '住房', '', '-366', '2022/05/16');
 INSERT INTO `tally` VALUES (40, 'root', '住房', '', '-100', '2022/05/16');
 INSERT INTO `tally` VALUES (41, 'root', '住房', '', '-1', '2022/05/16');
+INSERT INTO `tally` VALUES (44, 'root', '工资', '', '100', '2022/05/16');
+INSERT INTO `tally` VALUES (45, 'root', '娱乐', '', '-20.8', '2022/05/16');
+INSERT INTO `tally` VALUES (47, 'root3', '工资', '1234', '10', '2022/05/16');
+INSERT INTO `tally` VALUES (48, 'root3', '工资', 'test', '96', '2022/05/16');
+INSERT INTO `tally` VALUES (49, 'root3', '餐饮', '', '-30', '2022/05/16');
+INSERT INTO `tally` VALUES (50, 'root3', '工资', '', '100', '2022/06/17');
+INSERT INTO `tally` VALUES (51, 'root3', '工资', '', '3666', '2021/05/18');
+INSERT INTO `tally` VALUES (52, 'root3', '餐饮', '', '-100', '2021/05/18');
+INSERT INTO `tally` VALUES (53, 'root3', '餐饮', '', '-10', '2022/05/19');
+INSERT INTO `tally` VALUES (54, 'root3', '理财', '', '3', '2022/05/19');
+INSERT INTO `tally` VALUES (55, 'root3', '日用', '', '-20', '2022/05/19');
+INSERT INTO `tally` VALUES (56, 'root3', '旅行', '', '-30', '2022/05/19');
+INSERT INTO `tally` VALUES (57, 'root3', '娱乐', '', '-20', '2022/05/19');
+INSERT INTO `tally` VALUES (58, 'root3', '红包', '', '30', '2022/05/19');
+INSERT INTO `tally` VALUES (59, 'root3', '兼职', '', '20', '2022/05/19');
+INSERT INTO `tally` VALUES (60, 'root3', '现金', '', '20', '2022/05/19');
+INSERT INTO `tally` VALUES (61, 'root3', '餐饮', '', '-12', '2022/05/23');
+
+-- ----------------------------
+-- Table structure for tally_budget
+-- ----------------------------
+DROP TABLE IF EXISTS `tally_budget`;
+CREATE TABLE `tally_budget`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `budget` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tally_budget
+-- ----------------------------
+INSERT INTO `tally_budget` VALUES (1, 'root', '20');
+INSERT INTO `tally_budget` VALUES (6, 'root3', '100');
 
 -- ----------------------------
 -- Table structure for user_message

@@ -26,6 +26,32 @@ class tally {
             })
         }
     }
+    // 查询用户预算金额
+    async selectbudget(request, resposne, next) {
+        let selectSql = 'select * from tally_budget where username=?'
+        let params = request.username
+        try {
+            let result = await db.exec(selectSql, params)
+            if(result && result.length >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: '获取预算金额数据成功',
+                    data: result
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '获取预算金额数据失败'
+                })
+            }
+        }catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
     // 新增记账数据 
     async addtally(request, resposne, next) {
         let insertSql = 'insert into tally(`username`,`tallytype`,`remark`,`num`,`datetime`)values(?,?,?,?,?)'
@@ -58,6 +84,35 @@ class tally {
             })
         }
     }
+    // 新增预算金额数据
+    async addbudget(request, resposne, next) {
+        let insertSql = 'insert into tally_budget(`username`,`budget`)values(?,?)'
+        let params = [
+            request.username,
+            request.body.budget,
+        ]
+        try{
+            //console.log(params)
+            let result = await db.exec(insertSql,params)
+            if(result && result.affectedRows >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: "添加预算金额数据成功",
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: "添加预算金额数据失败"
+                })
+            }
+        }catch(error){
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+        }
     // 修改记账数据
     async updatetally(request, resposne, next) {
         let updateSql = 'update tally set tallytype=?,datetime=?,remark=?,num=? where id=? and username=?'
@@ -80,6 +135,35 @@ class tally {
                 resposne.json({
                     code: 201,
                     msg: '修改记账数据失败，请重试'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
+
+    // 修改预算金额数据
+    async updatebudget(request, resposne, next) {
+        let updateSql = 'update tally_budget set budget=? where username=?'
+        let params = [
+            request.body.budget,
+            request.username
+        ]
+        try {
+            let result = await db.exec(updateSql, params)
+            if (result && result.affectedRows >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: '修改预算金额数据成功'
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '修改预算金额数据失败，请重试'
                 })
             }
         } catch (error) {
