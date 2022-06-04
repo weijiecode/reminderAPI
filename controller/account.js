@@ -62,6 +62,7 @@ class Account {
             })
         }
         try {
+            // console.log(params)
             let result = await db.exec(loginSql, params)
             // console.log(result[0])
             if (result && result.length >= 1) {
@@ -96,6 +97,40 @@ class Account {
     // 移动端登录
     async mobilelogin(request, resposne, next) {
         let loginSql = 'select * from users where username=? and password=? and status=1'
+        let params = [
+            request.body.username,
+            md5(request.body.password + require('../config').key)
+        ]
+        // token加密
+        let token = jwt.sign({ name: request.body.username, id: request.body.id }, require('../config/index').tokenKey)
+        try {
+            let result = await db.exec(loginSql, params)
+            // console.log(result[0])
+            if (result && result.length >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: '登录成功',
+                    data: result[0],
+                    token: token
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '账号或密码错误'
+                })
+            }
+        } catch (error) {
+            resposne.json({
+                code: -201,
+                msg: '服务器异常',
+                error
+            })
+        }
+
+    }
+    // 后台管理系统登录
+    async adminlogin(request, resposne, next) {
+        let loginSql = 'select id,username,nickname,introduction,photo,sex,introduction from users where username=? and password=? and status=1'
         let params = [
             request.body.username,
             md5(request.body.password + require('../config').key)
