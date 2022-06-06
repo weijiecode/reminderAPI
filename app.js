@@ -25,6 +25,8 @@ server.use('/memorial',require('./routers/memorial'))
 server.use('/memo',require('./routers/memo'))
 server.use('/diary',require('./routers/diary'))
 server.use('/tally',require('./routers/tally'))
+// 后台管理系统
+server.use('/admin',require('./routers/admin'))
 
 server.listen(5001,()=>{
     console.log('server up 5001')
