@@ -11,11 +11,56 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 24/05/2022 12:17:17
+ Date: 07/06/2022 09:39:44
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for admin
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin`  (
+  `id` int(0) NOT NULL,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nickname` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `sex` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `introduction` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES (1, 'admin', 'Alice', 'b9a44f06013c2cb37e18a7458b66e83c', 'http://localhost:5001/public/upload/933d4dbfb38111f45c100cd921095495', '0', '15207054150', '245619254@qq.com', 'hello admin');
+
+-- ----------------------------
+-- Table structure for admin_login_data
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_login_data`;
+CREATE TABLE `admin_login_data`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `createtime` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ip` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admin_login_data
+-- ----------------------------
+INSERT INTO `admin_login_data` VALUES (1, 'admin', '2022-06-01', '192.168.0.1');
+INSERT INTO `admin_login_data` VALUES (2, 'admin', '2022-06-07 00:55:05', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (3, 'admin', '2022-06-07 00:57:46', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (4, 'admin', '2022-06-07 01:01:15', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (5, 'admin', '2022-06-07 01:04:27', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (6, 'admin', '2022-06-07 01:09:42', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (7, 'admin', '2022-06-07 02:23:23', '106.122.83.171');
 
 -- ----------------------------
 -- Table structure for backlog
