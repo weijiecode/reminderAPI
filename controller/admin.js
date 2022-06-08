@@ -152,9 +152,9 @@ class Admin {
             })
         }
     }
-    // 修改用户信息
-    async updatemycenter(request, resposne, next) {
-        let updateSql = 'update users set nickname=?,introduction=?,sex=?,phone=?,email=? where username=?'
+    // 修改管理员信息
+    async updateadmin(request, resposne, next) {
+        let updateSql = 'update admin set nickname=?,introduction=?,sex=?,phone=?,email=? where username=?'
         let params = [
             request.body.nickname,
             request.body.introduction,
@@ -168,12 +168,12 @@ class Admin {
             if (result && result.affectedRows >= 1) {
                 resposne.json({
                     code: 200,
-                    msg: '修改用户数据成功'
+                    msg: '修改管理员信息成功'
                 })
             } else {
                 resposne.json({
                     code: 201,
-                    msg: '修改用户数据失败，请重试'
+                    msg: '修改管理员信息失败，请重试'
                 })
             }
         } catch (error) {

@@ -8,5 +8,6 @@ router.post('/adminlogin',require('../controller/admin').adminlogin)
 router.post('/logindata',require('../controller/admin').logindata)
 // 查询登录信息
 router.post('/selectlogindata',tokenK,require('../controller/admin').selectlogindata)
-
+// 修改管理员信息
+router.post('/updateadmin',tokenK,require('../controller/admin').updateadmin)
 module.exports = router

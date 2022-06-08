@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 07/06/2022 09:39:44
+ Date: 09/06/2022 02:08:00
 */
 
 SET NAMES utf8mb4;
@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
   `id` int(0) NOT NULL,
   `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `nickname` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nickname` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `sex` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `sex` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `introduction` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'admin', 'Alice', 'b9a44f06013c2cb37e18a7458b66e83c', 'http://localhost:5001/public/upload/933d4dbfb38111f45c100cd921095495', '0', '15207054150', '245619254@qq.com', 'hello admin');
+INSERT INTO `admin` VALUES (1, 'admin', 'admin1', 'b9a44f06013c2cb37e18a7458b66e83c', 'http://localhost:5001/public/upload/933d4dbfb38111f45c100cd921095495', '0', '111', '222', '12');
 
 -- ----------------------------
 -- Table structure for admin_login_data
@@ -49,7 +49,7 @@ CREATE TABLE `admin_login_data`  (
   `createtime` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `ip` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin_login_data
@@ -61,6 +61,29 @@ INSERT INTO `admin_login_data` VALUES (4, 'admin', '2022-06-07 01:01:15', '106.1
 INSERT INTO `admin_login_data` VALUES (5, 'admin', '2022-06-07 01:04:27', '106.122.83.171');
 INSERT INTO `admin_login_data` VALUES (6, 'admin', '2022-06-07 01:09:42', '106.122.83.171');
 INSERT INTO `admin_login_data` VALUES (7, 'admin', '2022-06-07 02:23:23', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (8, 'admin', '2022-06-08 01:56:40', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (9, 'admin', '2022-06-08 01:59:37', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (10, 'admin', '2022-06-08 12:43:09', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (11, 'admin', '2022-06-08 20:17:09', '106.122.83.171');
+INSERT INTO `admin_login_data` VALUES (12, 'admin', '2022-06-08 23:41:08', '106.122.83.171');
+
+-- ----------------------------
+-- Table structure for admin_safe
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_safe`;
+CREATE TABLE `admin_safe`  (
+  `id` int(0) NOT NULL,
+  `username` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `question` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `answer` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `QQ` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admin_safe
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for backlog
@@ -318,9 +341,6 @@ INSERT INTO `memorial` VALUES (3, 'root', 'mmmm', '2023-05-03', NULL);
 INSERT INTO `memorial` VALUES (4, 'root', '7777', '2024-05-06', NULL);
 INSERT INTO `memorial` VALUES (6, 'root', 'ttttt', '2022-05-07', NULL);
 INSERT INTO `memorial` VALUES (11, 'root', '12321312', '2022-05-07', NULL);
-INSERT INTO `memorial` VALUES (12, 'root', '12312', '2022-05-07', NULL);
-INSERT INTO `memorial` VALUES (17, 'root', '1111122222', '2022-05-07', NULL);
-INSERT INTO `memorial` VALUES (18, 'root', '00000000', '2022-05-07', NULL);
 
 -- ----------------------------
 -- Table structure for message
