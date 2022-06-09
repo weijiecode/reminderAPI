@@ -244,22 +244,22 @@ class Admin {
         }
     }
 
-    // 查询用户数据
-    async selectuserdata(request, resposne, next) {
-        let userSql = 'select id,username,nickname,photo,status,phone,email,sex,introduction from users where username=?'
+    // 管理员查询用户所有数据
+    async selectuser(request, resposne, next) {
+        let userSql = 'select id,username,nickname,photo,status,email,sex,introduction from users'
         let params = request.username
         try {
             let result = await db.exec(userSql, params)
             if (result && result.length >= 1) {
                 resposne.json({
                     code: 200,
-                    msg: '获取用户数据成功',
+                    msg: '获取所有用户数据成功',
                     data: result
                 })
             } else {
                 resposne.json({
                     code: 201,
-                    msg: '获取用户数据失败，请重试'
+                    msg: '获取所有用户数据失败，请重试'
                 })
             }
         } catch (error) {
