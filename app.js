@@ -27,6 +27,7 @@ server.use('/diary',require('./routers/diary'))
 server.use('/tally',require('./routers/tally'))
 // 后台管理系统
 server.use('/admin',require('./routers/admin'))
+server.use('/admin',require('./routers/admin_safe'))
 
 server.listen(5001,()=>{
     console.log('server up 5001')
