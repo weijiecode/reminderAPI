@@ -245,8 +245,8 @@ class Admin {
         }
     }
 
-    // 管理员查询用户所有数据(测试未使用)
-    async selectuser_test(request, resposne, next) {
+    // 管理员查询用户所有数据(搜索)
+    async selectuser_search(request, resposne, next) {
         let isUser = 'select * from admin where username=?'
         let usernameparams = request.username
         
@@ -460,6 +460,116 @@ class Admin {
                 error
             })
         }
+    }
+    //  管理员修改用户信息
+    async updateuser(request, resposne, next) {
+        let isUser = 'select * from admin where username=?'
+        let usernameparams = request.username
+        try {
+            let isUserRes = await db.exec(isUser,usernameparams) 
+            // 查询是否为管理员用户
+            if(isUserRes.length>=1){
+                let updateSql = 'update users set nickname=?,introduction=?,sex=?,phone=?,email=?,status=? where id=?'
+                let params = [
+                    request.body.nickname,
+                    request.body.introduction,
+                    request.body.sex,
+                    request.body.phone,
+                    request.body.email,
+                    request.body.status,
+                    request.body.id
+                ]
+                try {
+                    let result = await db.exec(updateSql, params)
+                    // console.log(result)
+                    // console.log(params)
+                    if (result && result.affectedRows >= 1) {
+                        resposne.json({
+                            code: 200,
+                            msg: '修改该用户信息成功'
+                        })
+                    } else {
+                        resposne.json({
+                            code: 201,
+                            msg: '修改该用户信息失败，请重试'
+                        })
+                    }
+                } catch (error) {
+                    resposne.json({
+                        code: -201,
+                        msg: '服务器异常',
+                        error
+                    })
+                }
+            }else {
+                resposne.json({
+                    code: 201,
+                    msg: '无权访问',
+                    error
+                })
+            }    
+        } catch (error) {
+            resposne.json({
+                code: 201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
+
+    // 管理员添加用户
+    async adduser(request, resposne, next) {
+        let isUser = 'select * from admin where username=?'
+        let usernameparams = request.username
+        try {
+            let isUserRes = await db.exec(isUser,usernameparams) 
+            if(isUserRes.length>=1){
+                let insertSql = 'insert into users(`username`,`password`,`nickname`,`sex`,`phone`,`email`,`introduction`,`createtime`)values(?,?,?,?,?,?,?,?)'
+                let params = [
+                    request.body.username,
+                    md5(request.body.password + require('../config/index').key),
+                    request.body.nickname,
+                    request.body.sex,
+                    request.body.phone,
+                    request.body.email,
+                    request.body.introduction,
+                    moment().format('YYYY-MM-DD HH:mm:ss')
+                ]
+                try {
+                    let result = await db.exec(insertSql, params)
+                    if (result && result.affectedRows >= 1) {
+                        resposne.json({
+                            code: 200,
+                            msg: '注册成功',
+                        })
+                    } else {
+                        resposne.json({
+                            code: 201,
+                            msg: '注册失败'
+                        })
+                    }
+                } catch (error) {
+                    resposne.json({
+                        code: -201,
+                        msg: '服务器异常',
+                        error
+                    })
+                }
+            }else {
+                resposne.json({
+                    code: 201,
+                    msg: '无权访问',
+                    error
+                })
+            }    
+        } catch (error) {
+            resposne.json({
+                code: 201,
+                msg: '服务器异常',
+                error
+            })
+        }
+        
     }
 
 
