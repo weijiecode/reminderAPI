@@ -43,6 +43,7 @@ class Admin {
         }
 
     }
+    
     // 添加登录信息
     async logindata(request, resposne, next) {
         let insertSql = 'insert into admin_login_data(`username`,`createtime`,`ip`)values(?,?,?)'
@@ -244,31 +245,112 @@ class Admin {
         }
     }
 
-    // 管理员查询用户所有数据
-    async selectuser(request, resposne, next) {
-        let userSql = 'select id,username,nickname,photo,status,email,sex,introduction from users'
-        let params = request.username
+    // 管理员查询用户所有数据(测试未使用)
+    async selectuser_test(request, resposne, next) {
+        let isUser = 'select * from admin where username=?'
+        let usernameparams = request.username
+        
         try {
-            let result = await db.exec(userSql, params)
-            if (result && result.length >= 1) {
-                resposne.json({
-                    code: 200,
-                    msg: '获取所有用户数据成功',
-                    data: result
-                })
-            } else {
+            let isUserRes = await db.exec(isUser,usernameparams) 
+            if(isUserRes.length>=1){
+                let userSql = 'select id,username,nickname,phone,status,email,sex,introduction,createtime from users'
+                let params = request.username
+                try {
+                    let result = await db.exec(userSql, params)
+                    if (result && result.length >= 1) {
+                        resposne.json({
+                            code: 200,
+                            msg: '获取所有用户数据成功',
+                            data: result
+                        })
+                    } else {
+                        resposne.json({
+                            code: 201,
+                            msg: '获取所有用户数据失败，请重试'
+                        })
+                    }
+                } catch (error) {
+                    resposne.json({
+                        code: -201,
+                        msg: '服务器异常',
+                        error
+                    })
+                }
+            }else {
                 resposne.json({
                     code: 201,
-                    msg: '获取所有用户数据失败，请重试'
+                    msg: '无权访问',
+                    error
                 })
-            }
+            }    
         } catch (error) {
             resposne.json({
-                code: -201,
+                code: 201,
                 msg: '服务器异常',
                 error
             })
         }
+        
+    }
+
+    // 管理员查询用户所有数据（实现分页功能）
+    async selectuser(request, resposne, next) {
+        let isUser = 'select * from admin where username=?'
+        let usernameparams = request.username
+        try {
+            let isUserRes = await db.exec(isUser,usernameparams) 
+            // 查询是否为管理员用户
+            if(isUserRes.length>=1){
+                // 每页显示的数量
+                let pageSize = request.body.pageSize
+                // 当前页数
+                let currentPage = request.body.currentPage
+                // (n-1)*m
+                let n = (currentPage-1)*pageSize
+                let userCount = 'select count(id) as num from users'
+                let userSql = 'select id,username,nickname,phone,status,email,sex,introduction,createtime from users limit ?, ?'
+                let params = [
+                    n,
+                    pageSize
+                ]
+                try {
+                    let resultCount = await db.exec(userCount)
+                    let result = await db.exec(userSql, params)
+                    if (result && result.length >= 1) {
+                        resposne.json({
+                            code: 200,
+                            msg: '获取指定页数用户数据成功',
+                            data: result,
+                            count: JSON.stringify(resultCount)
+                        })
+                    } else {
+                        resposne.json({
+                            code: 201,
+                            msg: '获取指定页数用户数据失败，请重试'
+                        })
+                    }
+                } catch (error) {
+                    resposne.json({
+                        code: -201,
+                        msg: '服务器异常',
+                        error
+                    })
+                }
+            }else {
+                resposne.json({
+                    code: 201,
+                    msg: '无权访问',
+                    error
+                })
+            }    
+        } catch (error) {
+            resposne.json({
+                code: 201,
+                msg: '服务器异常',
+                error
+            })
+        }
+        
     }
     // 修改管理员信息
     async updateadmin(request, resposne, next) {
@@ -303,35 +385,82 @@ class Admin {
         }
     }
 
- // 修改管理员密码
- async updatepassword(request, resposne, next) {
-    let updateSql = 'update admin set password=? where username=? and password=?'
-    let params = [
-        md5(request.body.newpassword + require('../config/index').key),
-        request.username,
-        md5(request.body.oldpassword + require('../config/index').key)
-    ]
-    try {
-        let result = await db.exec(updateSql, params)
-        if (result && result.affectedRows >= 1) {
+    // 修改管理员密码
+    async updatepassword(request, resposne, next) {
+        let updateSql = 'update admin set password=? where username=? and password=?'
+        let params = [
+            md5(request.body.newpassword + require('../config/index').key),
+            request.username,
+            md5(request.body.oldpassword + require('../config/index').key)
+        ]
+        try {
+            let result = await db.exec(updateSql, params)
+            if (result && result.affectedRows >= 1) {
+                resposne.json({
+                    code: 200,
+                    msg: '修改密码成功'
+                })
+            } else {
+                resposne.json({
+                    code: 201,
+                    msg: '修改密码失败，请重试'
+                })
+            }
+        } catch (error) {
             resposne.json({
-                code: 200,
-                msg: '修改密码成功'
-            })
-        } else {
-            resposne.json({
-                code: 201,
-                msg: '修改密码失败，请重试'
+                code: -201,
+                msg: '服务器异常'
             })
         }
-    } catch (error) {
-        resposne.json({
-            code: -201,
-            msg: '服务器异常'
-        })
     }
-}
 
+    // 管理员删除指定ID用户
+    async deleteuser(request, resposne, next) {
+        let isUser = 'select * from admin where username=?'
+        let usernameparams = request.username
+        try {
+            let isUserRes = await db.exec(isUser,usernameparams) 
+            // 查询是否为管理员用户
+            if(isUserRes.length>=1){
+                let delSql = 'delete from users where id=?'
+                let paramsid = request.body.id
+                try {
+                    let resultdel = await db.exec(delSql, paramsid)
+                    // console.log(resultdel)
+                    if (resultdel && resultdel.affectedRows >= 1) {
+                        resposne.json({
+                            code: 200,
+                            msg: '删除指定ID用户成功',
+                            data: resultdel,
+                        })
+                    } else {
+                        resposne.json({
+                            code: 201,
+                            msg: '删除指定ID用户失败，请重试'
+                        })
+                    }
+                } catch (error) {
+                    resposne.json({
+                        code: -201,
+                        msg: '服务器异常',
+                        error
+                    })
+                }
+            }else {
+                resposne.json({
+                    code: 201,
+                    msg: '无权访问',
+                    error
+                })
+            }    
+        } catch (error) {
+            resposne.json({
+                code: 201,
+                msg: '服务器异常',
+                error
+            })
+        }
+    }
 
 
     // 发送用户头像url
